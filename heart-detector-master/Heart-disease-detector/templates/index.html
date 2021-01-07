@@ -1,0 +1,239 @@
+<!-- This is GUI for Heart disease Detection Application Using Machine Learning Classifer -->
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+
+  <style>
+    /* CSS code for button */
+    body {
+      background-image: url('images/image.jpeg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    /* CSS code for button */
+    .button_css {
+    color: #ffffff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #494949;
+    padding: 10px;
+    border: 4px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    }
+    
+    .button_css:hover {
+    color: #ffffff !important;
+    background: #f6b93b;
+    border-color: #f6b93b !important;
+    transition: all 0.4s ease 0s;
+    
+    }
+    h1 {
+    color: #494949;
+    text-align: center;
+    font-size: 35px;
+    font-family: verdana;
+      }
+    table {
+    width:20%;
+      }
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    th, td {
+    padding: 15px;
+    text-align: centre;
+    }
+    #t01 tr:nth-child(even) {
+    background-color: #eee;
+      }
+    #t01 tr:nth-child(odd) {
+    background-color: #fff;
+    }
+    #t01 th {
+    background-color: black;
+    color: white;
+    }
+    p {
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    font-family: verdana;
+      }
+}
+  </style>
+
+</head>
+
+<body>
+
+ 
+ 
+ <div class="login">
+	
+    <!-- Get input for predict the  heart disease -->
+    <center>
+         <br>
+            <br>
+               <br>
+                  <br>
+    <form action="{{ url_for('predict')}}"method="post">
+        <center>
+   <h1 style="color:black;">IOT HEALTH MONITORING SYSTEM</h1>
+       </center>
+       
+          <br>
+            <br>
+              <br>
+                <br>
+                  <br>
+                    <br>
+                      <br>
+                       
+                                        
+                                    
+
+        <h1 style="color:black;">ENTER THE PARAMETERS</h1>
+        
+    	<input type="text" name="age" placeholder="age" required="required" />
+        <input type="text" name="trestbps" placeholder="trestbps" required="required" />
+		<input type="text" name="chol" placeholder="chol" required="required" />
+        <input type="text" name="thalach" placeholder="thalach" required="required" />
+            <input type="text" name="oldpeak" placeholder="oldpeak" required="required" />
+		
+        
+
+		<br>
+    	<input type="text" name="sex_0" placeholder="sex_0" required="required" />
+        <input type="text" name="sex_1" placeholder="sex_1" required="required" />
+		<input type="text" name="cp_0" placeholder="cp_0" required="required" />
+        <input type="text" name=" cp_1" placeholder=" cp_1" required="required" />
+            <input type="text" name="cp_2" placeholder="cp_2" required="required" />
+    	
+        
+		
+		<br>
+    	<input type="text" name="cp_3" placeholder=" cp_3" required="required" />
+        <input type="text" name="fbs_0" placeholder="fbs_0" required="required" />
+		<input type="text" name="restecg_0" placeholder="restecg_0" required="required" />
+        <input type="text" name="restecg_1" placeholder="restecg_1" required="required" />
+            <input type="text" name="restecg_2" placeholder="restecg_2" required="required" />
+    	
+        
+		
+    	<br>
+    	<input type="text" name="exang_0" placeholder="exang_0" required="required" />
+        <input type="text" name="exang_1" placeholder="exang_1" required="required" />
+		<input type="text" name=" slope_0" placeholder=" slope_0" required="required" />
+        <input type="text" name=" slope_1" placeholder="slope_1" required="required" />
+    <input type="text" name="  slope_2" placeholder=" slope_2" required="required" />
+    	
+        
+			<br>
+
+
+      
+      <input type="text" name=" ca_0" placeholder=" ca_0" required="required" />
+        <input type="text" name="ca_1" placeholder="ca_1" required="required" />
+    <input type="text" name="ca_2" placeholder="ca_2" required="required" />
+        <input type="text" name=" thal_1" placeholder="thal_1" required="required" />
+    <input type="text" name="thal_2" placeholder="thal_2" required="required" />
+      
+        
+      <br>
+      <input type="text" name="thal_3" placeholder="thal_3" required="required" />
+      <br>
+
+
+      
+        
+        <!-- Show button -->
+        <div class="button_cont" align="center"><a class="button_css" href="https://github.com/prem-creator/heart-detector.git" target="_blank" rel="nofollow noopener">
+            <button type="submit" class="btn btn-primary btn-block btn-large"><strong>PREDICT RESULT</strong></button></a>
+        </div>
+        
+    </form>
+    </center>
+   
+   <!-- Show predicted output using ML model --> 
+   <div>
+       <center>
+   <h1 style="color:floralwhite;">{{ prediction_text }}</h1>
+       </center>
+       <br>
+            <br>
+              <br>
+               
+    
+       <center>
+           <h1 style="color:black;">REFERENCE TABLE</h1>
+        <table id="t01">
+  <tr>
+    <th>PARAMETERS</th>
+    <th>NORMAL RANGES AND INFO</th> 
+  </tr>
+  <tr>
+    <td>Blood Pressure</td>
+    <td>90/60mmHg to120/80mmHg</td>
+    
+  </tr>
+  <tr>
+    <td>thalach</td>
+    <td>60 to 100 BPM</td>
+    
+  </tr>
+  <tr>
+    <td>restecg_0</td>
+    <td>Normal</td>
+   
+  </tr>
+  <tr>
+    <td>restecg_1</td>
+    <td>having ST-T wave abnormality</td>
+   
+  </tr>
+  <tr>
+    <td>restecg_2</td>
+    <td>Showing probable or definite left ventricular hypertrophy</td>
+  </tr>
+  <tr>
+    <td>thal_0</td>
+    <td>Normal</td>
+  </tr>
+  <tr>
+    <td>thal_1</td>
+    <td>fixed defect</td>
+  </tr>
+  <tr>
+    <td>thal_2</td>
+    <td>reversible defect</td>
+  </tr>
+</table>
+            </center>
+   </div>
+
+ </div>
+    <br>
+              <br>
+                <br>
+                  
+        
+                             <br>
+                              <br>
+                               <br>
+    <center>
+    <p>&copy; Copyright TEAM ENVYUS . IOT HEALTH MONITORING SYSTEM</p>
+        </center>
+   </div>
+
+ </div>
+
+</body>
+</html>
